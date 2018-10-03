@@ -35,16 +35,16 @@ print("Expect: ",expected)
 
 model = Sequential()
 
-model.add(Dense(10, input_dim=10, activation='tanh'))
-#model.add(Dense(10, activation='tanh'))
+model.add(Dense(10, input_dim=10, activation='relu'))
+model.add(Dense(10, activation='relu'))
 
 model.add(Dense(10, activation='sigmoid'))
 
 sgd = SGD(lr=0.1)
 
-model.compile(loss='mean_squared_error', metrics=['accuracy' ], optimizer=sgd)
+model.compile(loss='mean_squared_error', metrics=['accuracy'], optimizer=sgd)
 
-model.load_weights(modelFile)
+#model.load_weights(modelFile)
 
 history = model.fit(X, Y, batch_size=1, epochs=10)
 
@@ -54,7 +54,7 @@ model.save_weights(modelFile)
 print(history.history.keys())
 
 # summarize history for accuracy
-plt.plot(history.history['binary_accuracy'])
+plt.plot(history.history['acc'])
 plt.title('model accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
